@@ -10,6 +10,10 @@ https://food-nutrition.canada.ca/cnf-fce/index-eng.jsp
 
 To begin, accumulate CNF files of interest based on 100 gram serving size and store in a single folder. Use the XLS to CSV javascript file included in the repo to facilitate use in R. 
 
+XLS to CSV code written by Chris West:
+
+http://cwestblog.com/2011/05/05/excel-batch-convert-xls-to-csv/
+
 Once folder with all csv files has been established, run the Nutrient File Grouping and Dataframe Creation.R file with the directory containing the csv files of interest. 
 
 This will result in a single dataframe ready for export and use.
