@@ -2,7 +2,7 @@
 Code for Assembling Mah Food Policy Lab Nutrition Files
 
 
-# Common Script for the Combination and Transformtion of CNF files
+# Common Script for the Combination and Transformation of CNF files
 
 To begin, accumulate CNF files of interest based on 100 gram serving size and store in a single folder. Use the XLS to CSV javascript file included in the repo to facilitate use in R. 
 
