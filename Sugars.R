@@ -69,66 +69,9 @@ Ntrnt1 <- lapply(Ntrnt1, setNames, c("Code", "Sugars.g"))
 
 Ntrnt1 <- plyr::ldply(Ntrnt1, data.frame)
 
-## Add Qs
+## Remove "Food Codes"
 
-Ntrnt1 <- cbind(temp2, Ntrnt1)
-
-## Remove suffix and prefix
-
-Ntrnt1$temp2 <- gsub(".csv", "", Ntrnt1$temp2)
-Ntrnt1$temp2 <- gsub("Q", "", Ntrnt1$temp2)
-
-## Make numeric
-
-Ntrnt1$temp2 <- as.numeric(Ntrnt1$temp2)
-
-## Arrange by question
-
-Ntrnt1 <- arrange(Ntrnt1, temp2)
-
-## Rename Q Column
-
-colnames(Ntrnt1)[1] <- "Q"
-
-## Remove ""Food code :" from the code column ##
-
-Ntrnt1$Code <- gsub("Food code :","", Ntrnt1$Code)
-
-##Create a data.frame to merge with Ntrnt1 to keep order and insert NAs for rows missing from data.frame
-
-Q <- 1:125
-Q <- data.frame(Q)
-Ntrnt1 <- merge(Ntrnt1, Qm, by="Q",all=T)
-
-## Add column of conversion factors
-
-Ntrnt1 <- cbind(Ntrnt1, Setconv$ConversionFactorValue)
-
-## Change name
-
-colnames(Ntrnt1)[4] <- "Conversion"
-
-## Convert from factor
-
-Ntrnt1$Sugars.g <- as.numeric(as.character(Ntrnt1$Sugars.g))
-
-## Multiply by conversion
-
-Ntrnt1 <- mutate(Ntrnt1, Sg.conv = Sugars.g*Conversion)
-
-## Get column of values
-
-Qsug <- (select(Ntrnt1, "Sg.conv"))
+Ntrnt1$Code <- gsub("Food code:","",Ntrnt1$Code)
 
 
-## Multiply by daily values
 
-FFQsug <- data.frame(mapply('*',FFQtc[-1],t(Qsug)))
-
-# Change NAs to zeros
-
-FFQsug[is.na(FFQsug)] <- 0
-
-## Get totals
-
-FFQsug <- mutate(FFQsug, Total.Sug.g = rowSums(FFQsug))

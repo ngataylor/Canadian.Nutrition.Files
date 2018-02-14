@@ -1,5 +1,13 @@
 ##Potassium Selection##
 
+# Set Working Directory 
+
+setwd("C://Users//Natha//Desktop//R//Branch Household Survey//Nutrient Files")
+
+# Select all files from the folder to load
+
+temp <- list.files(pattern="*.csv")
+
 ## Load in all data files
 
 Ntrnt1 <- lapply(temp,read.csv)
@@ -69,66 +77,9 @@ Ntrnt1 <- lapply(Ntrnt1, setNames, c("Code", "Potassium.mg"))
 
 Ntrnt1 <- plyr::ldply(Ntrnt1, data.frame)
 
-## Add Qs
+## Remove Food Code
 
-Ntrnt1 <- cbind(temp2, Ntrnt1)
-
-## Remove suffix and prefix
-
-Ntrnt1$temp2 <- gsub(".csv", "", Ntrnt1$temp2)
-Ntrnt1$temp2 <- gsub("Q", "", Ntrnt1$temp2)
-
-## Make numeric
-
-Ntrnt1$temp2 <- as.numeric(Ntrnt1$temp2)
-
-## Arrange by question
-
-Ntrnt1 <- arrange(Ntrnt1, temp2)
-
-## Rename Q Column
-
-colnames(Ntrnt1)[1] <- "Q"
-
-## Remove ""Food code :" from the code column ##
-
-Ntrnt1$Code <- gsub("Food code :","", Ntrnt1$Code)
-
-##Create a data.frame to merge with Ntrnt1 to keep order and insert NAs for rows missing from data.frame
-
-Q <- 1:125
-Q <- data.frame(Q)
-Ntrnt1 <- merge(Ntrnt1, Qm, by="Q",all=T)
-
-## Add column of conversion factors
-
-Ntrnt1 <- cbind(Ntrnt1, Setconv$ConversionFactorValue)
-
-## Change name
-
-colnames(Ntrnt1)[4] <- "Conversion"
-
-## Convert from factor
-
-Ntrnt1$Potassium.mg <- as.numeric(as.character(Ntrnt1$Potassium.mg))
-
-## Multiply by conversion
-
-Ntrnt1 <- mutate(Ntrnt1, P.conv = Potassium.mg*Conversion)
-
-## Get column of values
-
-Qpot <- (select(Ntrnt1, "P.conv"))
+Ntrnt1$Code <- gsub("Food code:","",Ntrnt1$Code)
 
 
-## Multiply by daily values
 
-FFQpot <- data.frame(mapply('*',FFQtc[-1],t(Qpot)))
-
-# Change NAs to zeros
-
-FFQpot[is.na(FFQpot)] <- 0
-
-## Get totals
-
-FFQpot <- mutate(FFQpot, Total.Pot.mg = rowSums(FFQpot))
