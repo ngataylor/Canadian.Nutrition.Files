@@ -23,3 +23,8 @@ The dataframe will contain Food Name, CNF Food Code, Protein content in grams, F
 # Common Nutrients of Interest
 
 To assess Sodium/Potassium ratio, or Sugar content specifically see the scripts developed for those molecules of interest. 
+
+
+# Questions, Comments or Concerns
+
+Email nathan.taylor@dal.ca
