@@ -8,7 +8,7 @@ Nutrient Files can be found here:
 
 https://food-nutrition.canada.ca/cnf-fce/index-eng.jsp
 
-To begin, accumulate CNF files of interest based on 100 gram serving size and store in a single folder. Use the XLS to CSV javascript file included in the repo to facilitate use in R. 
+To begin, accumulate CNF files of interest based on 100 gram serving size and store in a single folder. Use the XLS to CSV javascript file included in the repo to facilitate use in R. Just double-click the .js file in your folder containing the XLS files and follow the prompts. 
 
 XLS to CSV code written by Chris West:
 
