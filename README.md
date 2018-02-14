@@ -28,3 +28,8 @@ To assess Sodium/Potassium ratio, or Sugar content specifically see the scripts 
 # Questions, Comments or Concerns
 
 Email nathan.taylor@dal.ca
+
+
+All CNF conversion files, database structure files and user guides can be found in the folder or through the Government of Canada.
+
+https://food-nutrition.canada.ca/cnf-fce/index-eng.jsp
